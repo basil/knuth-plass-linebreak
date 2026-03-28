@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { assert } from 'chai';
+import { assert, describe, it } from 'vitest';
 import { XorShift } from 'xorshift';
 
 import {
@@ -508,8 +508,8 @@ describe('layout', () => {
       //
       // The best break sequence is 0-3-6:
       //
-      //   • first line  = 12 + (-2) = 10  (perfect fit, r = 0)
-      //   • second line = 9 + stretch(3)  (r = 1/3)
+      //   * first line  = 12 + (-2) = 10  (perfect fit, r = 0)
+      //   * second line = 9 + stretch(3)  (r = 1/3)
       //
       // Without Restriction-1 guarding the optimization, the active node for the
       // beginning of the paragraph is thrown away at breakpoint 1 (r = –∞), and the

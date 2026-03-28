@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Robert Knight
+ * Copyright (c) 2025 Basil Crow
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,44 +22,26 @@
  * SOFTWARE.
  */
 
-const path = require('path');
+import { defineConfig } from 'vitest/config';
+import { playwright } from '@vitest/browser-playwright';
+import dts from 'vite-plugin-dts';
 
-const hyphenLangs = [
-  'en-us',
-];
-let hyphenLibs = {};
-for (let lang of hyphenLangs) {
-  hyphenLibs[`hyphens_${lang}`] = `hyphenation.${lang}`;
-}
-
-module.exports = {
-  entry: {
-    demos: './src/demos/layout.ts',
-    lib: './src',
-    ...hyphenLibs,
+export default defineConfig({
+  build: {
+    lib: {
+      entry: 'src/index.ts',
+      formats: ['es', 'cjs'],
+      fileName: (format) => (format === 'es' ? 'index.js' : 'index.cjs'),
+    },
+    sourcemap: true,
   },
-  devtool: 'cheap-source-map',
-  module: {
-    rules: [{
-      test: /\.ts$/,
-      use: 'ts-loader',
-      exclude: /node_modules/,
-    }],
+  plugins: [dts({ include: ['src'] })],
+  test: {
+    include: ['test/**/*-test.ts'],
+    browser: {
+      enabled: true,
+      provider: playwright(),
+      instances: [{ browser: 'chromium' }],
+    },
   },
-  resolve: {
-    extensions: ['.ts'],
-  },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-
-    // Build a UMD bundle that can be used from a `<script>` tag, or imported
-    // into a CommonJS / ESM environment.
-    libraryTarget: 'umd',
-    library: 'texLineBreak_[name]',
-
-    // Make the UMD bundle usable in Node.
-    // See https://github.com/webpack/webpack/issues/6522
-    globalObject: "typeof self !== 'undefined' ? self : this",
-  },
-};
+});
