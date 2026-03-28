@@ -407,15 +407,20 @@ export function breakLines(
       }
     });
 
-    // Add feasible breakpoint with lowest score to active set.
+    // Knuth-Plass p. 1155: "a feasible breakpoint may now have to be
+    // entered into the active list up to four times." Keep the best node for
+    // each future-relevant state instead of collapsing everything at `b` to a
+    // single winner.
     if (feasible.length > 0) {
-      let bestNode = feasible[0];
-      for (let f of feasible) {
-        if (f.totalDemerits < bestNode.totalDemerits) {
-          bestNode = f;
+      const bestByState = new Map<string, Node>();
+      for (const f of feasible) {
+        const key = `${f.line}:${f.fitness}`;
+        const bestNode = bestByState.get(key);
+        if (!bestNode || f.totalDemerits < bestNode.totalDemerits) {
+          bestByState.set(key, f);
         }
       }
-      active.add(bestNode);
+      bestByState.forEach((node) => active.add(node));
     }
 
     // Handle situation where there is no way to break the paragraph without
