@@ -2,9 +2,9 @@
 
 ![npm version](https://img.shields.io/npm/v/knuth-plass-linebreak.svg)
 
-_knuth-plass-linebreak_ is a JavaScript library for laying out justified text as you
-would find in a newspaper, book or technical paper. It implements the
-Knuth-Plass line-breaking algorithm, as used by TeX.
+_knuth-plass-linebreak_ is a JavaScript library for laying out justified
+text as you would find in a newspaper, book or technical paper. It
+implements the Knuth-Plass line-breaking algorithm, as used by TeX.
 
 ## Introduction
 
@@ -36,9 +36,15 @@ hyphenation and this library:
     <td>_knuth-plass-linebreak_</td>
   </tr>
   <tr>
-    <td><img width="200" src="images/bigint-safari-justify.png"></td>
-    <td><img width="200" src="images/bigint-chrome-justify-hyphens.png"></td>
-    <td><img width="200" src="images/bigint-tex-linebreak.png"></td>
+    <td><img width="200"
+            src="images/bigint-safari-justify.png"
+            alt="Safari: text-align: justify"></td>
+    <td><img width="200"
+            src="images/bigint-chrome-justify-hyphens.png"
+            alt="Chrome: text-align: justify; hyphens: auto"></td>
+    <td><img width="200"
+            src="images/bigint-tex-linebreak.png"
+            alt="knuth-plass-linebreak"></td>
   </tr>
   <tr>
     <td>CSS justification produces large spaces on the second and penultimate
@@ -177,7 +183,7 @@ annotations.
 For working code showing different ways to use this library, see [the
 demos](src/demos/). You can build and run the demos using:
 
-```
+```sh
 npm i -g http-server
 
 git clone https://github.com/basil/knuth-plass-linebreak.git
@@ -187,7 +193,7 @@ yarn build-dev
 http-server -c-1
 ```
 
-Then navigate to http://127.0.0.1:8080/src/demos/layout.html (note that
+Then navigate to <http://127.0.0.1:8080/src/demos/layout.html> (note that
 http-server may choose a different port).
 
 ## Caveats
@@ -205,4 +211,6 @@ The library currently has a number of caveats:
 
 ## References
 
-[1] D. E. Knuth and M. F. Plass, “[Breaking paragraphs into lines](http://www.eprg.org/G53DOC/pdfs/knuth-plass-breaking.pdf),” Softw. Pract. Exp., vol. 11, no. 11, pp. 1119–1184, Nov. 1981.
+[1] D. E. Knuth and M. F. Plass,
+“[Breaking paragraphs into lines](http://www.eprg.org/G53DOC/pdfs/knuth-plass-breaking.pdf),”
+Softw. Pract. Exp., vol. 11, no. 11, pp. 1119–1184, Nov. 1981.

@@ -33,6 +33,7 @@ header:
     - '.github/CODEOWNERS'
     - '.gitignore'
     - '.licenserc.yaml'
+    - '.markdownlint.json'
     - '.prettierrc.json'
     - 'package.json'
     - 'yarn.lock'
