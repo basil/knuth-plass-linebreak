@@ -1,16 +1,16 @@
 {
-  "name": "tex-linebreak",
+  "name": "knuth-plass-linebreak",
   "version": "0.8.0",
   "main": "dist/lib.js",
   "types": "dist/types/src/index.d.ts",
   "license": "MIT",
   "author": {
-    "name": "Robert Knight",
-    "email": "robertknight@gmail.com"
+    "name": "Basil Crow",
+    "email": "me@basilcrow.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/robertknight/tex-linebreak.git"
+    "url": "https://github.com/basil/knuth-plass-linebreak.git"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",

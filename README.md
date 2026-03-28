@@ -1,8 +1,8 @@
-# tex-linebreak
+# knuth-plass-linebreak
 
-![npm version](https://img.shields.io/npm/v/tex-linebreak.svg)
+![npm version](https://img.shields.io/npm/v/knuth-plass-linebreak.svg)
 
-_tex-linebreak_ is a JavaScript library for laying out justified text as you
+_knuth-plass-linebreak_ is a JavaScript library for laying out justified text as you
 would find in a newspaper, book or technical paper. It implements the
 Knuth-Plass line-breaking algorithm, as used by TeX.
 
@@ -33,7 +33,7 @@ hyphenation and this library:
   <tr>
     <td>Safari: text-align: justify</td>
     <td>Chrome: text-align: justify; hyphens: auto</td>
-    <td>_tex-linebreak_</td>
+    <td>_knuth-plass-linebreak_</td>
   </tr>
   <tr>
     <td><img width="200" src="images/bigint-safari-justify.png"></td>
@@ -51,7 +51,7 @@ hyphenation and this library:
   </tr>
 </table>
 
-_tex-linebreak_ has no dependencies on a particular JS environment (browser,
+_knuth-plass-linebreak_ has no dependencies on a particular JS environment (browser,
 Node) or render target (`<canvas>`, HTML elements, PDF).
 
 ## Try it out
@@ -70,10 +70,10 @@ to restrict where scripts can be loaded from.
 
 ## Usage
 
-First, add the _tex-linebreak_ package to your dependencies:
+First, add the _knuth-plass-linebreak_ package to your dependencies:
 
 ```sh
-npm install tex-linebreak
+npm install knuth-plass-linebreak
 ```
 
 The library has low-level APIs which implement the core line-breaking and
@@ -89,7 +89,7 @@ represent hyphenation points or the end of a paragraph. However you can use them
 to lay out arbitrary content.
 
 ```js
-import { layoutItemsFromString, breakLines, positionItems } from 'tex-linebreak';
+import { layoutItemsFromString, breakLines, positionItems } from 'knuth-plass-linebreak';
 
 // Convert your text to a set of "box", "glue" and "penalty" items used by the
 // line-breaking process.
@@ -134,7 +134,7 @@ The contents of an existing HTML element can be justified using the
 
 ```js
 import enUsPatterns from 'hyphenation.en-us';
-import { createHyphenator, justifyContent } from 'tex-linebreak';
+import { createHyphenator, justifyContent } from 'knuth-plass-linebreak';
 
 const hyphenate = createHyphenator(enUsPatterns);
 const paragraphs = Array.from(document.querySelectorAll('p'));
@@ -153,7 +153,7 @@ WebGL etc.), the `layoutText` helper can be used to lay out justifed text and
 obtain the positions which each word should be drawn at.
 
 ```js
-import { createHyphenator, layoutText } from 'tex-linebreak';
+import { createHyphenator, layoutText } from 'knuth-plass-linebreak';
 
 import enUsPatterns from 'hyphenation.en-us';
 
@@ -180,8 +180,8 @@ demos](src/demos/). You can build and run the demos using:
 ```
 npm i -g http-server
 
-git clone https://github.com/robertknight/tex-linebreak.git
-cd tex-linebreak
+git clone https://github.com/basil/knuth-plass-linebreak.git
+cd knuth-plass-linebreak
 yarn
 yarn build-dev
 http-server -c-1

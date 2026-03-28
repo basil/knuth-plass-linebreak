@@ -3,11 +3,11 @@ javascript:(function() {
       browser.
    2. Visit a website and activate the bookmark. */
 var libScript = document.createElement('script');
-libScript.src = 'https://unpkg.com/tex-linebreak';
+libScript.src = 'https://unpkg.com/knuth-plass-linebreak';
 document.body.appendChild(libScript);
 
 var dictScript = document.createElement('script');
-dictScript.src = 'https://unpkg.com/tex-linebreak/dist/hyphens_en-us.js';
+dictScript.src = 'https://unpkg.com/knuth-plass-linebreak/dist/hyphens_en-us.js';
 document.body.appendChild(dictScript);
 
 var libLoaded = new Promise(resolve => libScript.onload=resolve);
