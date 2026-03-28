@@ -65,7 +65,7 @@ function readLayoutFixture(content: string): LayoutFixture {
   const outputs = [];
   for (let i = 1; i < sections.length; i += 2) {
     const outputSettings = JSON.parse(sections[i]);
-    const outputLines = sections[i + 1].split('\n').filter(l => l.length > 0);
+    const outputLines = sections[i + 1].split('\n').filter((l) => l.length > 0);
 
     outputs.push({
       layoutOptions: {
@@ -92,7 +92,7 @@ function repeat<T>(arr: T[], count: number) {
 }
 
 function itemsFromString(s: string, charWidth: number, glueStretch: number): TextInputItem[] {
-  const items = s.split(/(\s+|-)/).map(substr => {
+  const items = s.split(/(\s+|-)/).map((substr) => {
     const width = substr.length * charWidth;
     if (substr.match(/^\s+$/)) {
       return { type: 'glue', width, shrink: 2, stretch: glueStretch, text: substr } as TextGlue;
@@ -426,20 +426,14 @@ describe('layout', () => {
 
         // Check that breakpoints occur at expected positions.
         const actualLines = chunk(breakpoints, 2)
-          .map(([start, end]) =>
-            items
-              .slice(start, end)
-              .map(itemText)
-              .join('')
-              .trim(),
-          )
-          .filter(l => l.length > 0);
+          .map(([start, end]) => items.slice(start, end).map(itemText).join('').trim())
+          .filter((l) => l.length > 0);
 
         assert.deepEqual(actualLines, lines);
 
         // Check that adjustment ratios for each line are in range.
         const adjRatios = adjustmentRatios(items, layoutOptions.lineWidths, breakpoints);
-        adjRatios.forEach(ar => {
+        adjRatios.forEach((ar) => {
           assert.isAtLeast(ar, -1);
           assert.isAtMost(ar, layoutOptions.maxAdjustmentRatio);
         });

@@ -15,15 +15,10 @@ describe('helpers', () => {
       const measure = () => 5;
       const str = 'One fine day';
       const items = layoutItemsFromString(str, measure);
-      assert.deepEqual(items.map(it => it.type), [
-        'box',
-        'glue',
-        'box',
-        'glue',
-        'box',
-        'glue',
-        'penalty',
-      ]);
+      assert.deepEqual(
+        items.map((it) => it.type),
+        ['box', 'glue', 'box', 'glue', 'box', 'glue', 'penalty'],
+      );
     });
 
     it('adds a glue that stretches to fill the last line', () => {
@@ -57,7 +52,7 @@ describe('helpers', () => {
 
       const items = layoutItemsFromString('hel-lo wo-rld', measure, hyphenate).map(
         // Strip `text` property if this is a `TextBox` or `TextGlue`
-        it => (delete (it as any).text, it)
+        (it) => (delete (it as any).text, it),
       );
 
       assert.deepEqual(items, [
