@@ -4,7 +4,13 @@ process.env.CHROME_BIN = puppeteer.executablePath();
 
 module.exports = config => {
   config.set({
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
+      },
+    },
 
     frameworks: ['mocha'],
 
