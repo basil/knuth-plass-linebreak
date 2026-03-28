@@ -27,7 +27,7 @@ import Hypher from 'hypher';
 import enUsPatterns from 'hyphenation.en-us';
 
 import { forcedBreak } from '../src/layout';
-import { layoutItemsFromString, layoutText, TextBox } from '../src/helpers';
+import { layoutItemsFromString, layoutText } from '../src/helpers';
 
 import { box, glue, lineStrings, penalty } from './util';
 

@@ -182,8 +182,6 @@ describe('html', () => {
       para.innerHTML = `foo
       <span class="block" style="display: inline-block">${blockContent}</span>
       bar`;
-      const initialHtml = para.innerHTML;
-
       justifyContent(para);
 
       const blockBox = para.querySelector('.block')!;

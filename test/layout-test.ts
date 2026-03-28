@@ -30,8 +30,6 @@ import {
   breakLines,
   forcedBreak,
   positionItems,
-  Box,
-  Glue,
   InputItem,
   MaxAdjustmentExceededError,
   Penalty,
@@ -39,7 +37,7 @@ import {
 
 import { layoutItemsFromString, TextBox, TextGlue, TextInputItem } from '../src/helpers';
 
-import { box, chunk, glue, lineStrings, penalty } from './util';
+import { box, chunk, glue, lineStrings } from './util';
 
 import fixture from './fixtures/layout';
 
@@ -596,7 +594,6 @@ describe('layout', () => {
       const prng = new (XorShift as any)([1, 10, 15, 20]);
       const wordSoup = (length: number) => {
         let result: InputItem[] = [];
-        let wordLen = 5;
         while (result.length < length) {
           result.push({ type: 'box', width: prng.random() * 20 });
           result.push({ type: 'glue', width: 6, shrink: 3, stretch: 5 });
