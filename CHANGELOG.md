@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0] - 2025-08-02
 
- - Support negative widths and stretchability/shrinkability (thanks @basil) -
-   https://github.com/robertknight/tex-linebreak/pull/103
+- Support negative widths and stretchability/shrinkability (thanks @basil) -
+   <https://github.com/robertknight/tex-linebreak/pull/103>
 
 ## [0.7.0] - 2024-01-15
 
- - Add built-in type declarations (thanks @w8r) -
-   https://github.com/robertknight/tex-linebreak/pull/74
+- Add built-in type declarations (thanks @w8r) -
+   <https://github.com/robertknight/tex-linebreak/pull/74>
 
 ## [0.6.0] - 2021-12-28
 
