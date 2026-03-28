@@ -24,7 +24,7 @@
     "karma-mocha": "^2.0.1",
     "mocha": "^11.7.5",
     "prettier": "^3.8.1",
-    "puppeteer": "^22.15.0",
+    "puppeteer": "^24.40.0",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "webpack": "^5.105.4",
