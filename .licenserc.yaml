@@ -7,7 +7,7 @@ header:
     pattern: |
       MIT License
 
-      Copyright (c) (\d{4}(-\d{4})? )?(Bsail Crow|Robert Knight)
+      Copyright (c) (\d{4}(-\d{4})? )?(Basil Crow|Robert Knight)
 
       Permission is hereby granted, free of charge, to any person obtaining a copy
       of this software and associated documentation files [(]the "Software"[)], to deal
