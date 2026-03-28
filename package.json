@@ -1,8 +1,17 @@
 {
   "name": "knuth-plass-linebreak",
-  "version": "0.8.0",
-  "main": "dist/lib.js",
-  "types": "dist/types/src/index.d.ts",
+  "version": "0.9.0",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "license": "MIT",
   "author": {
     "name": "Basil Crow",
@@ -13,36 +22,30 @@
     "url": "https://github.com/basil/knuth-plass-linebreak.git"
   },
   "devDependencies": {
-    "@types/chai": "^5.2.3",
-    "@types/mocha": "^10.0.10",
     "@types/node": "^25.5.0",
-    "chai": "^6.2.2",
+    "@vitest/browser-playwright": "^4.1.2",
     "hyphenation.en-us": "^0.2.1",
     "hypher": "^0.2.5",
-    "karma": "^6.4.4",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-mocha": "^2.0.1",
-    "mocha": "^11.7.5",
+    "playwright": "^1.58.2",
     "prettier": "^3.8.1",
-    "puppeteer": "^24.40.0",
-    "ts-loader": "^9.5.4",
-    "typescript": "^5.9.3",
-    "webpack": "^5.105.4",
-    "webpack-cli": "^7.0.2",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.1.2",
     "xorshift": "^1.2.0"
   },
   "files": [
     "dist/**"
   ],
   "scripts": {
-    "build-prod": "webpack --mode production && yarn types",
-    "build-dev": "webpack --mode development",
-    "lint": "prettier --check src/*.ts src/**/*.ts test/**/*.ts",
-    "lint:fix": "prettier --write src/*.ts src/**/*.ts test/**/*.ts",
-    "prepublishOnly": "yarn build-prod",
-    "types": "tsc --declaration --emitDeclarationOnly --outDir dist/types",
-    "test": "webpack --mode development --config webpack-test.config.js && karma start --single-run",
-    "watch": "webpack --watch --mode development"
+    "build": "vite build",
+    "dev": "vite dev --open /src/demos/layout.html",
+    "lint": "prettier --check *.ts src/*.ts src/**/*.ts test/**/*.ts",
+    "lint:fix": "prettier --write *.ts src/*.ts src/**/*.ts test/**/*.ts",
+    "prepublishOnly": "yarn build",
+    "pretest": "playwright install chromium",
+    "test": "vitest run",
+    "watch": "vite build --watch"
   },
   "dependencies": {}
 }

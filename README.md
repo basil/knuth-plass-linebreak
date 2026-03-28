@@ -184,17 +184,14 @@ For working code showing different ways to use this library, see [the
 demos](src/demos/). You can build and run the demos using:
 
 ```sh
-npm i -g http-server
-
 git clone https://github.com/basil/knuth-plass-linebreak.git
 cd knuth-plass-linebreak
 yarn
-yarn build-dev
-http-server -c-1
+yarn dev
 ```
 
-Then navigate to <http://127.0.0.1:8080/src/demos/layout.html> (note that
-http-server may choose a different port).
+Run the test suite with `yarn test`. The test script installs Playwright's
+Chromium browser automatically if it is not already available locally.
 
 ## Caveats
 

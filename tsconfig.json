@@ -5,6 +5,7 @@
     "moduleResolution": "bundler",
     "lib": ["dom", "esnext"],
     "declaration": true,
+    "rootDir": "./src",
     "outDir": "./dist",
     "sourceMap": true,
     "strict": true,

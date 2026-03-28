@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { assert } from 'chai';
+import { assert, describe, it, beforeEach, afterEach } from 'vitest';
 import enUsPatterns from 'hyphenation.en-us';
 
 import { justifyContent } from '../src/html';
