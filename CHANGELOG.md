@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-03-28
+
+### Changed
+
+- Rename package from `tex-linebreak` to `knuth-plass-linebreak`
+- Migrate build and test tooling from webpack/karma to vite/vitest
+
+### Fixed
+
+- Exclude penalty width from `widthToNextBox` scan
+- Return adjustment ratio 0 for exact-fit lines with rigid glue
+- Require terminal forced break in `breakLines`
+- Preserve fitness class nodes during line breaking
+
+## [0.8.1] - 2025-08-04
+
+- Limit an optimization to only apply when no items have negative widths,
+  shrink or stretch -
+  <https://github.com/robertknight/tex-linebreak/pull/105>
+
 ## [0.8.0] - 2025-08-02
 
 - Support negative widths and stretchability/shrinkability (thanks @basil) -
