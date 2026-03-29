@@ -7,19 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.9.1] - 2026-03-29
 
-### Fixed
-
 - Use suffix-minimum floor for smarter overfull-line pruning
 
 ## [0.9.0] - 2026-03-28
 
-### Changed
-
 - Rename package from `tex-linebreak` to `knuth-plass-linebreak`
 - Migrate build and test tooling from webpack/karma to vite/vitest
-
-### Fixed
-
 - Exclude penalty width from `widthToNextBox` scan
 - Return adjustment ratio 0 for exact-fit lines with rigid glue
 - Require terminal forced break in `breakLines`
