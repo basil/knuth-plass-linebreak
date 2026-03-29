@@ -37,7 +37,7 @@ import {
 
 import { layoutItemsFromString, TextBox, TextGlue, TextInputItem } from '../src/helpers';
 
-import { box, chunk, glue, lineStrings } from './util';
+import { box, chunk, glue, lineStrings, penalty } from './util';
 
 import fixture from './fixtures/layout';
 
@@ -557,18 +557,18 @@ describe('layout', () => {
     });
 
     it('applies a penalty for consecutive lines ending with a hyphen', () => {
-      const text = 'one two long-word one long-word';
+      const text = 'long-word long-word one long-word';
       const charWidth = 5;
       const glueStretch = 60;
       const items = itemsFromString(text, charWidth, glueStretch);
-      const lineWidth = 13 * charWidth;
+      const lineWidth = 14 * charWidth;
 
       // Break lines without a double-hyphen penalty.
       let breakpoints = breakLines(items, lineWidth);
       let lines = lineStrings(items, breakpoints);
       assert.deepEqual(
         lines,
-        ['one two long-', 'word one long-', 'word'],
+        ['longword long-', 'word one long-', 'word'],
         'did not break as expected without penalty',
       );
 
@@ -579,7 +579,7 @@ describe('layout', () => {
       lines = lineStrings(items, breakpoints);
       assert.deepEqual(
         lines,
-        ['one two', 'longword one', 'longword'],
+        ['longword long-', 'word one', 'longword'],
         'did not break as expected with penalty',
       );
     });
@@ -649,6 +649,22 @@ describe('layout', () => {
       const items = [box(10), glue(5, 10, 10), box(10), forcedBreak()];
       const opts = { maxAdjustmentRatio: 1 };
       assert.throws(() => breakLines(items, 100, opts), MaxAdjustmentExceededError);
+    });
+
+    it('does not carry a breakpoint penalty width into the next line', () => {
+      const items = [
+        box(3),
+        box(3),
+        glue(1, 1, 1),
+        penalty(1, 0, false),
+        box(3),
+        penalty(2, 10, false),
+        box(3),
+        glue(2, 1, 2),
+        forcedBreak(),
+      ];
+
+      assert.deepEqual(breakLines(items, 12), [0, 5, 8]);
     });
 
     it('treats an exact-fit line with rigid glue as having zero adjustment', () => {
