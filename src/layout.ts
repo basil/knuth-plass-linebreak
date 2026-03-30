@@ -111,6 +111,25 @@ export interface Options {
    * Penalty for significant differences in the tightness of adjacent lines.
    */
   adjacentLooseTightPenalty: number;
+
+  /**
+   * Optional callback that returns an extra badness penalty for a given
+   * adjustment ratio.
+   *
+   * This is added to the base badness (`100 * |r|^3`) before demerits are
+   * computed. It lets callers penalize loose lines on a continuous curve
+   * rather than relying on a hard `maxAdjustmentRatio` cutoff.
+   *
+   * The callback is only invoked for finite adjustment ratios. Non-finite
+   * ratios are ignored by the library.
+   *
+   * The callback must return a finite number >= 0.
+   *
+   * Example: Quadratic penalty for lines looser than `r = 1`
+   *
+   *     adjustmentRatioPenalty: (r) => r <= 1 ? 0 : 1000 * (r - 1) ** 2
+   */
+  adjustmentRatioPenalty?: ((ratio: number) => number) | null;
 }
 
 /**
@@ -138,6 +157,7 @@ const defaultOptions: Options = {
   initialMaxAdjustmentRatio: 1,
   doubleHyphenPenalty: 0,
   adjacentLooseTightPenalty: 0,
+  adjustmentRatioPenalty: null,
 };
 
 /**
@@ -397,7 +417,17 @@ export function breakLines(
         // We found a feasible breakpoint. Compute a `demerits` score for it as
         // per formula on p. 1128.
         let demerits;
-        const badness = 100 * Math.abs(adjustmentRatio) ** 3;
+        const baseBadness = 100 * Math.abs(adjustmentRatio) ** 3;
+        let extraBadness = 0;
+        if (Number.isFinite(adjustmentRatio) && opts_.adjustmentRatioPenalty != null) {
+          extraBadness = opts_.adjustmentRatioPenalty(adjustmentRatio);
+          if (!Number.isFinite(extraBadness) || extraBadness < 0) {
+            throw new Error(
+              `adjustmentRatioPenalty must return a finite non-negative number, got ${extraBadness}`,
+            );
+          }
+        }
+        const badness = baseBadness + extraBadness;
         const penalty = item.type === 'penalty' ? item.cost : 0;
 
         if (penalty >= 0) {
