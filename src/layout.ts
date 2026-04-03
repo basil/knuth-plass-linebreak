@@ -128,6 +128,7 @@ export const MIN_COST = -1000;
 export const MAX_COST = 1000;
 
 const MIN_ADJUSTMENT_RATIO = -1;
+const PARAGRAPH_START = -1;
 
 function isForcedBreak(item: InputItem) {
   return item.type === 'penalty' && item.cost <= MIN_COST;
@@ -212,7 +213,7 @@ export function breakLines(
 
   // Add initial active node for beginning of paragraph.
   active.add({
-    index: 0,
+    index: PARAGRAPH_START,
     line: 0,
     // Fitness is ignored for this node.
     fitness: 0,
@@ -326,8 +327,8 @@ export function breakLines(
         }
 
         let doubleHyphenPenalty = 0;
-        const prevItem = items[a.index];
-        if (item.type === 'penalty' && prevItem.type === 'penalty') {
+        const prevItem = a.index === PARAGRAPH_START ? null : items[a.index];
+        if (item.type === 'penalty' && prevItem?.type === 'penalty') {
           if (item.flagged && prevItem.flagged) {
             doubleHyphenPenalty = opts_.doubleHyphenPenalty;
           }
@@ -345,7 +346,7 @@ export function breakLines(
         } else {
           fitness = 3;
         }
-        if (a.index > 0 && Math.abs(fitness - a.fitness) > 1) {
+        if (a.index !== PARAGRAPH_START && Math.abs(fitness - a.fitness) > 1) {
           demerits += opts_.adjacentLooseTightPenalty;
         }
 
@@ -485,7 +486,7 @@ export function breakLines(
   const output = [];
   let next: Node | null = bestNode!;
   while (next) {
-    output.push(next.index);
+    output.push(next.index === PARAGRAPH_START ? 0 : next.index);
     next = next.prev;
   }
   output.reverse();
