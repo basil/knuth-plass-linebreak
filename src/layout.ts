@@ -328,7 +328,7 @@ export function breakLines(
     // Update the set of active nodes.
     let lastActive: Node | null = null;
 
-    const feasible: Node[] = [];
+    const bestByState = new Map<number, Node>();
     active.forEach((a) => {
       // Compute adjustment ratio from `a` to `b`.
       let adjustmentRatio = 0;
@@ -495,7 +495,11 @@ export function breakLines(
           totalDemerits: a.totalDemerits + demerits,
           prev: a,
         };
-        feasible.push(node);
+        const stateKey = node.line * 4 + fitness;
+        const bestNode = bestByState.get(stateKey);
+        if (!bestNode || node.totalDemerits < bestNode.totalDemerits) {
+          bestByState.set(stateKey, node);
+        }
       }
     });
 
@@ -503,17 +507,7 @@ export function breakLines(
     // entered into the active list up to four times." Keep the best node for
     // each future-relevant state instead of collapsing everything at `b` to a
     // single winner.
-    if (feasible.length > 0) {
-      const bestByState = new Map<string, Node>();
-      for (const f of feasible) {
-        const key = `${f.line}:${f.fitness}`;
-        const bestNode = bestByState.get(key);
-        if (!bestNode || f.totalDemerits < bestNode.totalDemerits) {
-          bestByState.set(key, f);
-        }
-      }
-      bestByState.forEach((node) => active.add(node));
-    }
+    bestByState.forEach((node) => active.add(node));
 
     // Handle situation where there is no way to break the paragraph without
     // shrinking or stretching a line beyond [-1, currentMaxAdjustmentRatio].
