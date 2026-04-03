@@ -217,10 +217,9 @@ export function breakLines(
   // intermediate widths, negative penalty widths, and forced breaks with
   // negative content preceding them.
   const suffixMinBreakpointFloor = new Array<number>(items.length).fill(Infinity);
-  {
+  if (!hasNegativeStretchOrShrink) {
     let sumWidth = 0;
     let sumShrink = 0;
-    const breakpointFloors: [number, number][] = [];
 
     for (let b = 0; b < items.length; b++) {
       const item = items[b];
@@ -240,7 +239,7 @@ export function breakLines(
 
       if (isBreak) {
         const penaltyWidth = item.type === 'penalty' ? item.width : 0;
-        breakpointFloors.push([b, sumWidth + penaltyWidth - sumShrink]);
+        suffixMinBreakpointFloor[b] = sumWidth + penaltyWidth - sumShrink;
       }
       if (isBreak && item.type === 'glue') {
         sumWidth += item.width;
@@ -250,10 +249,12 @@ export function breakLines(
 
     // Backward pass: suffix minimum floor over strictly later breakpoints.
     let minFloor = Infinity;
-    for (let i = breakpointFloors.length - 1; i >= 0; i--) {
-      const [index, floor] = breakpointFloors[i];
-      suffixMinBreakpointFloor[index] = minFloor;
-      minFloor = Math.min(minFloor, floor);
+    for (let i = items.length - 1; i >= 0; i--) {
+      const floor = suffixMinBreakpointFloor[i];
+      if (floor !== Infinity) {
+        suffixMinBreakpointFloor[i] = minFloor;
+        minFloor = Math.min(minFloor, floor);
+      }
     }
   }
 
