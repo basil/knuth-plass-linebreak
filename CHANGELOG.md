@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.4] - 2026-04-03
+
+- Skip leading glue and penalties when computing line content start, removing
+  dependency on TeX's Restriction 2
+- Replace per-node running sums with prefix-sum `lineMetrics` in `breakLines`
+- Introduce `PARAGRAPH_START` sentinel for initial active node
+- Use suffix-minimum floor for smarter overfull-line pruning, with
+  fallback-node guard for negative widths
+- Fix HTML justification to skip leading whitespace and correctly compute DOM ranges
+
 ## [0.9.3] - 2026-04-03
 
 - Remove `adjustmentRatioPenalty` option
