@@ -71,8 +71,9 @@ function cssFontForElement(el: Element) {
 
   // Fall back to generating CSS font property value if browser (eg. Firefox)
   // does not synthesize it automatically.
-  const { fontStyle, fontVariant, fontWeight, fontSize, fontFamily } = style;
-  font = `${fontStyle!} ${fontVariant!} ${fontWeight!} ${fontSize!} ${fontFamily}`;
+  const { fontStyle, fontVariantCaps, fontWeight, fontSize, fontFamily } = style;
+  // Canvas only accepts `normal` or `small-caps` for font-variant.
+  font = `${fontStyle!} ${fontVariantCaps === 'small-caps' ? 'small-caps' : 'normal'} ${fontWeight!} ${fontSize!} ${fontFamily}`;
   return font;
 }
 
