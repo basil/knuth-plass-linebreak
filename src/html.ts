@@ -99,6 +99,7 @@ function addItemsForTextNode(
   const shrink = Math.max(0, spaceWidth - 3);
   const hyphenWidth = measureFn(el, '-');
   const isSpace = (word: string) => /\s/.test(word.charAt(0));
+  const inCode = !!el.closest('code');
 
   const chunks = text.split(/(\s+)/).filter((w) => w.length > 0);
   let textOffset = 0;
@@ -119,7 +120,7 @@ function addItemsForTextNode(
       return;
     }
 
-    if (hyphenateFn) {
+    if (hyphenateFn && !inCode) {
       const chunks = hyphenateFn(w);
       chunks.forEach((c, i) => {
         const box: DOMBox = {
