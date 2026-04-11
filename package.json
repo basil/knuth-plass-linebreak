@@ -40,8 +40,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite dev --open /src/demos/layout.html",
-    "lint": "prettier --check *.ts src/*.ts src/**/*.ts test/**/*.ts",
-    "lint:fix": "prettier --write *.ts src/*.ts src/**/*.ts test/**/*.ts",
+    "lint": "prettier --check '**/*.ts'",
+    "lint:fix": "prettier --write '**/*.ts'",
     "prepublishOnly": "yarn build",
     "pretest": "playwright install chromium",
     "test": "vitest run",
