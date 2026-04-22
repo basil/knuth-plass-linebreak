@@ -22,31 +22,21 @@
  * SOFTWARE.
  */
 
-import { defineConfig } from 'vitest/config';
-import { playwright } from '@vitest/browser-playwright';
-import dts from 'vite-plugin-dts';
+import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite';
 
+// Produces a standalone UMD bundle of the `hyphenation.en-us` pattern data so
+// it can be loaded via a `<script>` tag (used by `src/demos/bookmarklet.js`
+// via `unpkg.com/knuth-plass-linebreak/dist/hyphens_en-us.js`).
 export default defineConfig({
   build: {
+    emptyOutDir: false,
     sourcemap: true,
     lib: {
-      entry: 'src/index.ts',
-      formats: ['es', 'cjs', 'umd'],
-      name: 'texLineBreak_lib',
-      fileName: (format) => {
-        if (format === 'es') return 'index.js';
-        if (format === 'cjs') return 'index.cjs';
-        return 'lib.js';
-      },
-    },
-  },
-  plugins: [dts({ tsconfigPath: './tsconfig.build.json' })],
-  test: {
-    include: ['test/**/*-test.ts'],
-    browser: {
-      enabled: true,
-      provider: playwright(),
-      instances: [{ browser: 'chromium' }],
+      entry: fileURLToPath(import.meta.resolve('hyphenation.en-us')),
+      formats: ['umd'],
+      name: 'texLineBreak_hyphens_en-us',
+      fileName: () => 'hyphens_en-us.js',
     },
   },
 });

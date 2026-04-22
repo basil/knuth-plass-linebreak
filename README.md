@@ -190,8 +190,13 @@ yarn
 yarn dev
 ```
 
-Run the test suite with `yarn test`. The test script installs Playwright's
-Chromium browser automatically if it is not already available locally.
+The test suite runs in a real Chromium browser via Playwright. Install the
+browser once, then run the tests:
+
+```sh
+yarn playwright install chromium
+yarn test
+```
 
 ## Caveats
 
