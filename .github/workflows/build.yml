@@ -17,9 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v6.4.0
         with:
           node-version: 22.x
           cache: yarn
@@ -28,7 +28,7 @@ jobs:
       - name: Install Playwright
         run: yarn playwright install --with-deps chromium
       - name: Check Markdown
-        uses: DavidAnson/markdownlint-cli2-action@v23
+        uses: DavidAnson/markdownlint-cli2-action@v23.2.0
       - name: Lint
         run: yarn lint
       - name: Build
