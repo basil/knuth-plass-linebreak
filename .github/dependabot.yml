@@ -12,7 +12,7 @@ updates:
     commit-message:
       prefix: "chore"
     cooldown:
-      default-days: 7
+      default-days: 30
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -20,4 +20,4 @@ updates:
     commit-message:
       prefix: "chore"
     cooldown:
-      default-days: 7
+      default-days: 30
