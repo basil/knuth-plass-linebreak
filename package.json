@@ -32,7 +32,7 @@
     "prettier": "^3.8.3",
     "typescript": "^6.0.3",
     "vite": "^8.0.16",
-    "vite-plugin-dts": "^5.0.1",
+    "vite-plugin-dts": "^5.0.3",
     "vitest": "^4.1.2",
     "xorshift": "^1.2.0"
   },
