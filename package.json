@@ -24,7 +24,7 @@
     "url": "https://github.com/basil/knuth-plass-linebreak.git"
   },
   "devDependencies": {
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.2.0",
     "@vitest/browser-playwright": "^4.1.11",
     "hyphenation.en-us": "^0.2.1",
     "hypher": "^0.2.5",
