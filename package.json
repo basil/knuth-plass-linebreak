@@ -29,7 +29,7 @@
     "hyphenation.en-us": "^0.2.1",
     "hypher": "^0.2.5",
     "playwright": "^1.62.1",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.6",
     "typescript": "^6.0.3",
     "vite": "^8.2.1",
     "vite-plugin-dts": "^5.0.3",
